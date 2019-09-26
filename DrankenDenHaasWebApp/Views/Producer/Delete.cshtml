@@ -1,0 +1,49 @@
+﻿@model DrankenDenHaasWebApp.ProducerViewModel
+@using DrankenDenHaasWebApp.Translations
+@{
+    // Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>@Texts.DeleteSure</h3>
+    <div>
+        <h4>Producer</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProducentNaam)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProducentNaam)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Land)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Land)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="@Texts.Delete" class="btn btn-default" /> |
+                @Html.ActionLink(Texts.BackToList, "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

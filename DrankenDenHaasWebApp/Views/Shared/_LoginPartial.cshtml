@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNet.Identity
+@using DrankenDenHaasWebApp.Translations
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @*<span>@Texts.Hello @User.Identity.GetUserName()!</span>*@
+                @Html.ActionLink(Texts.Hello + " "  + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = Texts.Manage })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+
+        //Het account symbool is enkel zichtbaar als je bent aangemeld!
+        //Het winkelmandje daarentegen is altijd zichtbaar!
+        <ul class="nav navbar-nav navbar-right">
+            <li><a class="btn-warning" role="button" title="@Texts.Account" onclick="location.href='@Url.Action("Details", "Account", new { id = User.Identity.GetUserId() })'"><i class="far fa-user-circle"></i></a></li>
+        </ul>
+    }
+
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink(Texts.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink(Texts.LogIn, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+
+
+<ul class="nav navbar-nav navbar-right">
+    <li><a class="btn-danger" role="button" title=@Texts.Shopbasket onclick="location.href='@Url.Action("Index", "Shopbasket")'"><i class="fa fa-shopping-cart"></i></a></li>
+</ul>
+

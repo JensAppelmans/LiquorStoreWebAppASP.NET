@@ -1,0 +1,160 @@
+﻿@model DrankenDenHaasWebApp.Models.AccountDetailViewModel
+@using DrankenDenHaasWebApp.Translations;
+
+@{
+    ViewBag.Title = "Detail";
+}
+<div class="text-center">
+    <div class="row">
+        <i class="far fa-user-circle fa-3x"></i>
+
+        @{ if (Model.IsZakelijk == true)
+            {
+                <h2>@Texts.BussinessAccount</h2>
+            }
+            else
+            {<h2>@Texts.PrivateAccount</h2>}
+        }
+
+    </div>
+    <hr />
+    @Html.ActionLink("Bekijk bestellingen", "PersonOrder", "Order", new { id = Model.UserId }, null)<br />
+    @Html.ActionLink(Texts.ChangeAccount, "Edit", new { id = Model.UserId })<br />
+    @Html.ActionLink(Texts.ChangePassword, "Manage", null, htmlAttributes: new { title = Texts.Manage })
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-md-7">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Usernaam)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Usernaam)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsZakelijk)
+            </dt>
+
+            <dd>
+                @{ if (Model.IsZakelijk == true)
+                    {
+                        <p>@Texts.Yes</p>
+                    }
+                    else
+                    {
+                        <p>@Texts.No</p>
+                    }
+                }
+            </dd>
+
+            @{ if (Model.IsZakelijk != true)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Voornaam)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Voornaam)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Achternaam)
+                    </dt>
+
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Achternaam)
+                    </dd>
+                }
+            }
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Telefoon)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Telefoon)
+            </dd>
+
+            @{ if (Model.IsZakelijk == true)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BTW_nummer)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.BTW_nummer)
+                    </dd>
+                }
+            }
+            <dt>
+                @Html.DisplayNameFor(model => model.TaalId)
+            </dt>
+            <dd>
+               @ViewBag.LanguageName @*@Html.DisplayFor(model => model.TaalId)*@
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-5">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Land)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Land)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Provincie)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Provincie)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Stad)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Stad)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Postcode)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Postcode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Straatnaam)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Straatnaam)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nummer_Bus)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nummer_Bus)
+            </dd>
+        </dl>
+    </div>
+</div>
+<p>
+    
+    @*@Html.ActionLink("Te", "Index")*@
+</p>

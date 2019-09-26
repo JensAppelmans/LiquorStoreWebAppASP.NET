@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DrankenDenHaasWebApp.Order_ProductsViewModel>
+
+@{
+ //   Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BestelId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productnaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aantal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prijs_Item)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subtotaal)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BestelId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Productnaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aantal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prijs_Item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subtotaal)
+                </td>
+
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
+        @if (User.IsInRole("Productmanager") || User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Ga terug", "Index", "Order")
+        }
+        else
+        {
+            @Html.ActionLink("Ga terug", "Details", "Account")
+
+        }
+
+
+    </table>
+</body>
+</html>

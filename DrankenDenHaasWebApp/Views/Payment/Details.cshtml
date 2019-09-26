@@ -1,0 +1,58 @@
+﻿@model DrankenDenHaasWebApp.PaymentViewModel
+
+@{
+  //  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Payment</h4>
+    	<hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DatumVanBetaling)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DatumVanBetaling)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BedragBetaald)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BedragBetaald)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Kaartnummer)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Kaartnummer)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BestelId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BestelId)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.BetalingsId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

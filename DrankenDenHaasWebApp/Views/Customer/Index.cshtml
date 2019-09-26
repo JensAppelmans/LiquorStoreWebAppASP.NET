@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DrankenDenHaasWebApp.CustomerViewModel>
+
+@{
+ //   Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Usernaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Iszakelijk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+
+
+
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usernaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Iszakelijk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.KlantId }) |*@
+                @Html.ActionLink("Details", "Details", new { id = item.KlantId }) |
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.KlantId })*@
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

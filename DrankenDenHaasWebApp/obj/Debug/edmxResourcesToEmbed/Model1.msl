@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DrankencentraleDBJensAppelmansModelStoreContainer" CdmEntityContainer="DrankencentraleDBJensAppelmansEntities">
+    <EntitySetMapping Name="Adressen">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Adressen">
+        <MappingFragment StoreEntitySet="Adressen">
+          <ScalarProperty Name="AdresId" ColumnName="AdresId" />
+          <ScalarProperty Name="Land" ColumnName="Land" />
+          <ScalarProperty Name="Provincie" ColumnName="Provincie" />
+          <ScalarProperty Name="Stad" ColumnName="Stad" />
+          <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+          <ScalarProperty Name="Staatnaam" ColumnName="Staatnaam" />
+          <ScalarProperty Name="Nummer_Bus" ColumnName="Nummer/Bus" />
+          <ScalarProperty Name="KlantID" ColumnName="KlantID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bestellingen">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Bestellingen">
+        <MappingFragment StoreEntitySet="Bestellingen">
+          <ScalarProperty Name="BestelId" ColumnName="BestelId" />
+          <ScalarProperty Name="KlantId" ColumnName="KlantId" />
+          <ScalarProperty Name="DatumVanBestelling" ColumnName="DatumVanBestelling" />
+          <ScalarProperty Name="Totaalprijs" ColumnName="Totaalprijs" />
+          <ScalarProperty Name="IsBetaald" ColumnName="IsBetaald" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bestellingen_Producten">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Bestellingen_Producten">
+        <MappingFragment StoreEntitySet="Bestellingen_Producten">
+          <ScalarProperty Name="BestelId" ColumnName="BestelId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Aantal" ColumnName="Aantal" />
+          <ScalarProperty Name="Prijs_Item" ColumnName="Prijs/Item" />
+          <ScalarProperty Name="Subtotaal" ColumnName="Subtotaal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Betaalkaarten">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Betaalkaarten">
+        <MappingFragment StoreEntitySet="Betaalkaarten">
+          <ScalarProperty Name="BetaalkaartId" ColumnName="BetaalkaartId" />
+          <ScalarProperty Name="KlantId" ColumnName="KlantId" />
+          <ScalarProperty Name="KaartNaam" ColumnName="KaartNaam" />
+          <ScalarProperty Name="Kaartnummer" ColumnName="Kaartnummer" />
+          <ScalarProperty Name="DatumGeldigTot" ColumnName="DatumGeldigTot" />
+          <ScalarProperty Name="Primairekaart" ColumnName="Primairekaart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Betalingen">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Betalingen">
+        <MappingFragment StoreEntitySet="Betalingen">
+          <ScalarProperty Name="BetalingsId" ColumnName="BetalingsId" />
+          <ScalarProperty Name="DatumVanBetaling" ColumnName="DatumVanBetaling" />
+          <ScalarProperty Name="BedragBetaald" ColumnName="BedragBetaald" />
+          <ScalarProperty Name="BetaalKaartId" ColumnName="BetaalKaartId" />
+          <ScalarProperty Name="BestelId" ColumnName="BestelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categoriën">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Categoriën">
+        <MappingFragment StoreEntitySet="Categoriën">
+          <ScalarProperty Name="CategorieId" ColumnName="CategorieId" />
+          <ScalarProperty Name="Categorienaam" ColumnName="Categorienaam" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facturen">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Facturen">
+        <MappingFragment StoreEntitySet="Facturen">
+          <ScalarProperty Name="FactuurId" ColumnName="FactuurId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Klanten">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Klanten">
+        <MappingFragment StoreEntitySet="Klanten">
+          <ScalarProperty Name="KlantId" ColumnName="KlantId" />
+          <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="Gebruikersnaam" ColumnName="Gebruikersnaam" />
+          <ScalarProperty Name="EmailAdres" ColumnName="EmailAdres" />
+          <ScalarProperty Name="Bedrijfsnaam" ColumnName="Bedrijfsnaam" />
+          <ScalarProperty Name="Wachtwoord" ColumnName="Wachtwoord" />
+          <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
+          <ScalarProperty Name="BTW_nummer" ColumnName="BTW-nummer" />
+          <ScalarProperty Name="IsZakelijk" ColumnName="IsZakelijk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producenten">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Producenten">
+        <MappingFragment StoreEntitySet="Producenten">
+          <ScalarProperty Name="ProducentId" ColumnName="ProducentId" />
+          <ScalarProperty Name="ProducentNaam" ColumnName="ProducentNaam" />
+          <ScalarProperty Name="Land" ColumnName="Land" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producten">
+      <EntityTypeMapping TypeName="DrankencentraleDBJensAppelmansModel.Producten">
+        <MappingFragment StoreEntitySet="Producten">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Productnaam" ColumnName="Productnaam" />
+          <ScalarProperty Name="Prijs" ColumnName="Prijs" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="CategorieId" ColumnName="CategorieId" />
+          <ScalarProperty Name="AlcoholPercentage___" ColumnName="AlcoholPercentage(%)" />
+          <ScalarProperty Name="Inhoud_cl_" ColumnName="Inhoud(cl)" />
+          <ScalarProperty Name="ProducentId" ColumnName="ProducentId" />
+          <ScalarProperty Name="VerkochtPer" ColumnName="VerkochtPer" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,124 @@
+﻿@model IEnumerable<DrankenDenHaasWebApp.Models.Shopbasket>
+@using Microsoft.AspNet.Identity
+@using DrankenDenHaasWebApp.Translations
+@if (Model.Any())
+{
+    <div class="text-center">
+        <i class="fas fa-shopping-cart fa-3x"></i>
+        <h2>@Texts.Shopbasket</h2>
+    </div>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductNaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prijs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aantal)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @{ double totaal = 0;
+            double subtotaal = 0;
+            int aantal = 0;
+
+            foreach (var item in Model)
+            {
+                subtotaal = (double)(item.Aantal * item.Prijs);
+                totaal += subtotaal;
+                subtotaal = 0;
+                aantal += item.Aantal;
+            }
+
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="textCenterTable">
+                    @if (item.ImagePath != null)
+                    {
+
+                        <img class="img-responsive" src="@Url.Content(item.ImagePath)" height="50" width="125" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductNaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prijs)
+                    @{
+                        subtotaal += (double)item.Prijs;
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aantal)
+                </td>
+                <td>
+                    @Html.ActionLink(Texts.Edit, "Edit", new { id = item.Id }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                    @Html.ActionLink(Texts.Delete, "Delete", new { id = item.Id })
+                </td>
+            </tr>
+                        }
+
+    </table>
+
+    <hr />
+    <div class="row">
+        <div class="col-lg-8">
+            <p>@Texts.Amount @Texts.Articles: @aantal.ToString() @Texts.Items</p><br />
+            <strong>@Texts.TotalPrice: @totaal.ToString() euro</strong>
+        </div>
+        <div class="col">
+            @if (User.Identity.IsAuthenticated)
+            {
+                //string tot = totaal.ToString();
+                @*<input type="submit" value="Checkout" class="btn btn-primary" />*@
+                @*@Html.ActionLink("Checkout", "Create", "Order", new { id = tot }, null);*@
+                <a class="btn btn-primary" role="button" @*onclick="location.href='@Url.Action("Create", "Order", new { id = tot})'"*@ data-toggle="modal" data-target="#bevestiging"><i class="far fa-credit-card fa-2x"><p style="font-family:'Century Gothic'"> Checkout!</p></i></a>
+            }
+            else
+            {
+                <p>Log in of registreer om te betalen!</p>
+            }
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="bevestiging" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Bestelbevestiging</h3>
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>*@
+                </div>
+                <div class="modal-body">
+                    Dankjewel voor je vertrouwen in DrankenDenHaas! Bekijk ook zeker je profiel voor een overzicht van alle bestellingen....
+                </div>
+
+                @{string tot = totaal.ToString(); }
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-warning" data-dismiss="modal">Begrepen :) </button>*@
+                    <a class=" btn btn-primary" role="button" onclick="location.href='@Url.Action("Create", "Order", new { id = tot})'">Begrepen! :) </a>
+                    @*<button id="GoTo" type="submit" class="btn btn-primary">@Texts.Shopbasket</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+else
+{
+
+    <h3>@Texts.BasketEmpty</h3>
+}

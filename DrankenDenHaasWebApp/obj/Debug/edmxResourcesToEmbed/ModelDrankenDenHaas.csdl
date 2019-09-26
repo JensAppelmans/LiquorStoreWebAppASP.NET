@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DrankencentraleDBJensAppelmansModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DrankencentraleDBJensAppelmansEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Adresses" EntityType="DrankencentraleDBJensAppelmansModel.Adress" />
+    <EntitySet Name="AspNetUsers" EntityType="DrankencentraleDBJensAppelmansModel.AspNetUser" />
+    <EntitySet Name="Categories" EntityType="DrankencentraleDBJensAppelmansModel.Category" />
+    <EntitySet Name="Customers" EntityType="DrankencentraleDBJensAppelmansModel.Customer" />
+    <EntitySet Name="Debitcards" EntityType="DrankencentraleDBJensAppelmansModel.Debitcard" />
+    <EntitySet Name="Languages" EntityType="DrankencentraleDBJensAppelmansModel.Language" />
+    <EntitySet Name="Multimedias" EntityType="DrankencentraleDBJensAppelmansModel.Multimedia" />
+    <EntitySet Name="Orders" EntityType="DrankencentraleDBJensAppelmansModel.Order" />
+    <EntitySet Name="Orders_Products" EntityType="DrankencentraleDBJensAppelmansModel.Orders_Products" />
+    <EntitySet Name="Payments" EntityType="DrankencentraleDBJensAppelmansModel.Payment" />
+    <EntitySet Name="Producers" EntityType="DrankencentraleDBJensAppelmansModel.Producer" />
+    <EntitySet Name="Products" EntityType="DrankencentraleDBJensAppelmansModel.Product" />
+    <EntitySet Name="Sessions" EntityType="DrankencentraleDBJensAppelmansModel.Session" />
+    <AssociationSet Name="FK_Adresses_AspNetUsers" Association="DrankencentraleDBJensAppelmansModel.FK_Adresses_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Adress" EntitySet="Adresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_ToLanguages" Association="DrankencentraleDBJensAppelmansModel.FK_AspNetUsers_ToLanguages">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BetaalKaarten_AspNetUsers" Association="DrankencentraleDBJensAppelmansModel.FK_BetaalKaarten_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Debitcard" EntitySet="Debitcards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_AspNetUsers" Association="DrankencentraleDBJensAppelmansModel.FK_Customers_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sessions_ToAspNetUsers" Association="DrankencentraleDBJensAppelmansModel.FK_Sessions_ToAspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Session" EntitySet="Sessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producten_Categoriën" Association="DrankencentraleDBJensAppelmansModel.FK_Producten_Categoriën">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bestellingen_Customers" Association="DrankencentraleDBJensAppelmansModel.FK_Bestellingen_Customers">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Betalingen_Betaalkaarten" Association="DrankencentraleDBJensAppelmansModel.FK_Betalingen_Betaalkaarten">
+      <End Role="Debitcard" EntitySet="Debitcards" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Multimedia_Products" Association="DrankencentraleDBJensAppelmansModel.FK_Multimedia_Products">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Multimedia" EntitySet="Multimedias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bestellingen_Producten_Bestellingen" Association="DrankencentraleDBJensAppelmansModel.FK_Bestellingen_Producten_Bestellingen">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Orders_Products" EntitySet="Orders_Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Betalingen_Bestellingen" Association="DrankencentraleDBJensAppelmansModel.FK_Betalingen_Bestellingen">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bestellingen_Producten_Producten" Association="DrankencentraleDBJensAppelmansModel.FK_Bestellingen_Producten_Producten">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Orders_Products" EntitySet="Orders_Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producten_Producenten" Association="DrankencentraleDBJensAppelmansModel.FK_Producten_Producenten">
+      <End Role="Producer" EntitySet="Producers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Adress">
+    <Key>
+      <PropertyRef Name="AdresId" />
+    </Key>
+    <Property Name="AdresId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Land" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Provincie" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Stad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Postcode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Straatnaam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nummer_Bus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="DrankencentraleDBJensAppelmansModel.FK_Adresses_AspNetUsers" FromRole="Adress" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Telefoon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BTW_nummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsZakelijk" Type="Boolean" />
+    <Property Name="TaalId" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="GeboorteDatum" Type="DateTime" Precision="7" />
+    <NavigationProperty Name="Adresses" Relationship="DrankencentraleDBJensAppelmansModel.FK_Adresses_AspNetUsers" FromRole="AspNetUser" ToRole="Adress" />
+    <NavigationProperty Name="Language" Relationship="DrankencentraleDBJensAppelmansModel.FK_AspNetUsers_ToLanguages" FromRole="AspNetUser" ToRole="Language" />
+    <NavigationProperty Name="Debitcards" Relationship="DrankencentraleDBJensAppelmansModel.FK_BetaalKaarten_AspNetUsers" FromRole="AspNetUser" ToRole="Debitcard" />
+    <NavigationProperty Name="Customers" Relationship="DrankencentraleDBJensAppelmansModel.FK_Customers_AspNetUsers" FromRole="AspNetUser" ToRole="Customer" />
+    <NavigationProperty Name="Sessions" Relationship="DrankencentraleDBJensAppelmansModel.FK_Sessions_ToAspNetUsers" FromRole="AspNetUser" ToRole="Session" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategorieId" />
+    </Key>
+    <Property Name="CategorieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Categorienaam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="DrankencentraleDBJensAppelmansModel.FK_Producten_Categoriën" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="KlantId" />
+    </Key>
+    <Property Name="KlantId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="DrankencentraleDBJensAppelmansModel.FK_Customers_AspNetUsers" FromRole="Customer" ToRole="AspNetUser" />
+    <NavigationProperty Name="Orders" Relationship="DrankencentraleDBJensAppelmansModel.FK_Bestellingen_Customers" FromRole="Customer" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Debitcard">
+    <Key>
+      <PropertyRef Name="BetaalkaartId" />
+    </Key>
+    <Property Name="BetaalkaartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="KaartNaam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Kaartnummer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DatumGeldigTot" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Primairekaart" Type="Boolean" />
+    <NavigationProperty Name="AspNetUser" Relationship="DrankencentraleDBJensAppelmansModel.FK_BetaalKaarten_AspNetUsers" FromRole="Debitcard" ToRole="AspNetUser" />
+    <NavigationProperty Name="Payments" Relationship="DrankencentraleDBJensAppelmansModel.FK_Betalingen_Betaalkaarten" FromRole="Debitcard" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="TaalId" />
+    </Key>
+    <Property Name="Taalnaam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaalId" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DrankencentraleDBJensAppelmansModel.FK_AspNetUsers_ToLanguages" FromRole="Language" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="Multimedia">
+    <Key>
+      <PropertyRef Name="MultimediaId" />
+    </Key>
+    <Property Name="MultimediaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="DrankencentraleDBJensAppelmansModel.FK_Multimedia_Products" FromRole="Multimedia" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="BestelId" />
+    </Key>
+    <Property Name="BestelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="DatumVanBestelling" Type="DateTime" Precision="7" />
+    <Property Name="Totaalprijs" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="IsBetaald" Type="Boolean" />
+    <NavigationProperty Name="Customer" Relationship="DrankencentraleDBJensAppelmansModel.FK_Bestellingen_Customers" FromRole="Order" ToRole="Customer" />
+    <NavigationProperty Name="Orders_Products" Relationship="DrankencentraleDBJensAppelmansModel.FK_Bestellingen_Producten_Bestellingen" FromRole="Order" ToRole="Orders_Products" />
+    <NavigationProperty Name="Payments" Relationship="DrankencentraleDBJensAppelmansModel.FK_Betalingen_Bestellingen" FromRole="Order" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Orders_Products">
+    <Key>
+      <PropertyRef Name="BestelId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="BestelId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Aantal" Type="Int32" Nullable="false" />
+    <Property Name="Prijs_Item" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Subtotaal" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="Order" Relationship="DrankencentraleDBJensAppelmansModel.FK_Bestellingen_Producten_Bestellingen" FromRole="Orders_Products" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="DrankencentraleDBJensAppelmansModel.FK_Bestellingen_Producten_Producten" FromRole="Orders_Products" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="BetalingsId" />
+    </Key>
+    <Property Name="BetalingsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DatumVanBetaling" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="BedragBetaald" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="BetaalKaartId" Type="Int32" Nullable="false" />
+    <Property Name="BestelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Debitcard" Relationship="DrankencentraleDBJensAppelmansModel.FK_Betalingen_Betaalkaarten" FromRole="Payment" ToRole="Debitcard" />
+    <NavigationProperty Name="Order" Relationship="DrankencentraleDBJensAppelmansModel.FK_Betalingen_Bestellingen" FromRole="Payment" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Producer">
+    <Key>
+      <PropertyRef Name="ProducentId" />
+    </Key>
+    <Property Name="ProducentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProducentNaam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Land" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="DrankencentraleDBJensAppelmansModel.FK_Producten_Producenten" FromRole="Producer" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Productnaam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Prijs" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CategorieId" Type="Int32" Nullable="false" />
+    <Property Name="AlcoholPercentage___" Type="Double" />
+    <Property Name="Inhoud_cl_" Type="Double" Nullable="false" />
+    <Property Name="ProducentId" Type="Int32" Nullable="false" />
+    <Property Name="VerkochtPer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="DrankencentraleDBJensAppelmansModel.FK_Producten_Categoriën" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Multimedias" Relationship="DrankencentraleDBJensAppelmansModel.FK_Multimedia_Products" FromRole="Product" ToRole="Multimedia" />
+    <NavigationProperty Name="Orders_Products" Relationship="DrankencentraleDBJensAppelmansModel.FK_Bestellingen_Producten_Producten" FromRole="Product" ToRole="Orders_Products" />
+    <NavigationProperty Name="Producer" Relationship="DrankencentraleDBJensAppelmansModel.FK_Producten_Producenten" FromRole="Product" ToRole="Producer" />
+  </EntityType>
+  <EntityType Name="Session">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Starttime" Type="DateTime" Precision="7" />
+    <Property Name="Stoptime" Type="DateTime" Precision="7" />
+    <Property Name="NumberOfOperations" Type="Int32" />
+    <NavigationProperty Name="AspNetUser" Relationship="DrankencentraleDBJensAppelmansModel.FK_Sessions_ToAspNetUsers" FromRole="Session" ToRole="AspNetUser" />
+  </EntityType>
+  <Association Name="FK_Adresses_AspNetUsers">
+    <End Type="DrankencentraleDBJensAppelmansModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Adress" Role="Adress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Adress">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_ToLanguages">
+    <End Type="DrankencentraleDBJensAppelmansModel.Language" Role="Language" Multiplicity="0..1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="TaalId" />
+      </Principal>
+      <Dependent Role="AspNetUser">
+        <PropertyRef Name="TaalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BetaalKaarten_AspNetUsers">
+    <End Type="DrankencentraleDBJensAppelmansModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Debitcard" Role="Debitcard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Debitcard">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_AspNetUsers">
+    <End Type="DrankencentraleDBJensAppelmansModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sessions_ToAspNetUsers">
+    <End Type="DrankencentraleDBJensAppelmansModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Session" Role="Session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Session">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producten_Categoriën">
+    <End Type="DrankencentraleDBJensAppelmansModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategorieId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategorieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bestellingen_Customers">
+    <End Type="DrankencentraleDBJensAppelmansModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="KlantId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Betalingen_Betaalkaarten">
+    <End Type="DrankencentraleDBJensAppelmansModel.Debitcard" Role="Debitcard" Multiplicity="1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Debitcard">
+        <PropertyRef Name="BetaalkaartId" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="BetaalKaartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Multimedia_Products">
+    <End Type="DrankencentraleDBJensAppelmansModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Multimedia" Role="Multimedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Multimedia">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bestellingen_Producten_Bestellingen">
+    <End Type="DrankencentraleDBJensAppelmansModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Orders_Products" Role="Orders_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="BestelId" />
+      </Principal>
+      <Dependent Role="Orders_Products">
+        <PropertyRef Name="BestelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Betalingen_Bestellingen">
+    <End Type="DrankencentraleDBJensAppelmansModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="BestelId" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="BestelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bestellingen_Producten_Producten">
+    <End Type="DrankencentraleDBJensAppelmansModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Orders_Products" Role="Orders_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Orders_Products">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producten_Producenten">
+    <End Type="DrankencentraleDBJensAppelmansModel.Producer" Role="Producer" Multiplicity="1" />
+    <End Type="DrankencentraleDBJensAppelmansModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producer">
+        <PropertyRef Name="ProducentId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ProducentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,56 @@
+﻿@model DrankenDenHaasWebApp.Models.Shopbasket
+@using DrankenDenHaasWebApp.Translations
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@Texts.Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>@Texts.Shopbasket</h3>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductNaam, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ProductNaam, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.ProductNaam)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prijs, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Prijs, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Prijs)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Aantal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Aantal)
+                @Html.ValidationMessageFor(model => model.Aantal)
+            </div>
+        </div>
+
+
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(Texts.BackToList, "Index")
+</div>

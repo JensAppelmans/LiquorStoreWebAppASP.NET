@@ -1,0 +1,42 @@
+﻿@model DrankenDenHaasWebApp.ProducerViewModel
+@using DrankenDenHaasWebApp.Translations
+@{
+    //  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Producer</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProducentNaam)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProducentNaam)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Land)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Land)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink(Texts.Edit, "Edit", new { id = Model.ProducentId }) |
+        @Html.ActionLink(Texts.BackToList, "Index")
+    </p>
+</body>
+</html>

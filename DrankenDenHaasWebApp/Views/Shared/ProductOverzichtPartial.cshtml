@@ -1,0 +1,176 @@
+﻿@using DrankenDenHaasWebApp.Translations
+@using DrankenDenHaasWebApp.Models
+@model IEnumerable<DrankenDenHaasWebApp.ProductViewModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+</head>
+<body>
+    @*@using (Html.BeginForm("AddProduct", "Shopbasket"))
+        {
+            @Html.AntiForgeryToken()*@
+    <table class="table table-hover table-responsive" id="product">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th style="display: none;">
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productnaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prijs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlcoholPercentage___)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inhoud_cl_)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerkochtPer)
+            </th>
+            <th>@Texts.Amount</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+        <tr>
+            <td class="textCenterTable" >
+                @if (item.ImagePath != null)
+                {
+
+                    <img id="img" class="img-responsive" src="@Url.Content(item.ImagePath)" height="50" width="125" />
+                }
+                </td>
+            <td style="display: none;" class="textCenterTable">
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+
+            <td class="textCenterTable">
+                @Html.DisplayFor(modelItem => item.Productnaam)
+            </td>
+            <td class="textCenterTable">
+                @Html.DisplayFor(modelItem => item.Prijs)
+            </td>
+
+            <td class="textCenterTable">
+                @Html.DisplayFor(modelItem => item.AlcoholPercentage___)
+            </td>
+            <td class="textCenterTable">
+                @Html.DisplayFor(modelItem => item.Inhoud_cl_)
+            </td>
+            <td class="textCenterTable">
+                @Html.DisplayFor(modelItem => item.VerkochtPer)
+            </td>
+            <td>
+                <div class="form-group">
+                    <select class="form-control" id="select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+            </td>
+
+            <td>
+                <i type="submit" id="test" class="fas fa-shopping-cart fa-2x" style="cursor: pointer" data-toggle="modal" data-target="#winkelmand"
+                   title="@Texts.Add"
+                   @*onclick="location.href='@Url.Action("AddProduct", "Shopbasket",
+                                              new { id = item.ProductId, naam = item.Productnaam, prijs = item.Prijs, aantal = 2 })'">*@
+                   @*onclick="@DrankenDenHaasWebApp.Models.Shopbasket.VoegProptoe( item.ProductId, item.Productnaam, 2, item.Prijs )"*@>
+                </i>
+
+            </td>
+            <td>
+                @Html.ActionLink(Texts.Details, "Details", "Product", new { id = item.ProductId }, null)
+            </td>
+        </tr>
+        }
+    </table>
+
+    <div class="modal fade" id="winkelmand" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel"></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Verder winkelen</button>
+                    <a class=" btn btn-primary" role="button" onclick="location.href='@Url.Action("Index", "Shopbasket")'">@Texts.Shopbasket</a>
+                    @*<button id="GoTo" type="submit" class="btn btn-primary">@Texts.Shopbasket</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+            // code to read selected table row cell data (values).
+            $("#product").on('click', '#test', function () {
+                // get the current row
+
+                var currentRow = $(this).closest("tr");
+
+                var image = currentRow.find("#img").attr('src');
+                var id = currentRow.find("td:eq(1)").text();
+                var naam = currentRow.find("td:eq(2)").text();
+                var prijs = currentRow.find("td:eq(3)").text();
+                var col4 = currentRow.find("td:eq(4)").text();
+                var col5 = currentRow.find("td:eq(5)").text();
+                var aantal = currentRow.find("#select").val();
+
+                $(".modal-title").text(naam);
+                $(".modal-body").text("U hebt " + aantal + " maal" + naam + "toegevoegd aan winkelmand!");
+
+                var shopItem = {
+                    ImagePath: image,
+                    Id: id,
+                    ProductNaam: naam,
+                    Prijs: prijs,
+                    Aantal: aantal
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "Shopbasket/Create", // the method we are calling
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(shopItem),
+                    dataType: "json"
+                    //success: function (result) {
+                    //    alert('Yay! It worked!');
+
+
+                    //},
+                    //error: function (result) {
+                    //    alert('Oh no :(');
+                    //}
+                })
+            });
+        });
+    </script>
+
+
+</body>
+</html>
+

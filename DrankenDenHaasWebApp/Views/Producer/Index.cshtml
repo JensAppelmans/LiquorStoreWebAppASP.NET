@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DrankenDenHaasWebApp.ProducerViewModel>
+@using DrankenDenHaasWebApp.Translations
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink(Texts.ProducerNew, "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProducentNaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Land)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProducentNaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Land)
+                </td>
+                <td>
+                    @Html.ActionLink(Texts.Edit, "Edit", new { id = item.ProducentId }) |
+                    @Html.ActionLink(Texts.Details, "Details", new { id = item.ProducentId }) |
+                    @Html.ActionLink(Texts.Delete, "Delete", new { id = item.ProducentId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

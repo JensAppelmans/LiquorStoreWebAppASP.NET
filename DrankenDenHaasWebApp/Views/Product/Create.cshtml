@@ -1,0 +1,106 @@
+﻿@model DrankenDenHaasWebApp.ProductViewModel
+    @using DrankenDenHaasWebApp.Translations
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <div>
+        @{Html.RenderPartial("AddPicture", new DrankenDenHaasWebApp.MultimediaViewModel());}
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h3>Then fill out details of @Texts.Product</h3>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Productnaam, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Productnaam)
+                    @Html.ValidationMessageFor(model => model.Productnaam)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prijs, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Prijs)
+                    @Html.ValidationMessageFor(model => model.Prijs)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Beschrijving, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Beschrijving)
+                    @Html.ValidationMessageFor(model => model.Beschrijving)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CategorieId, "Categorie", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CategorieId")
+                    @Html.ValidationMessageFor(model => model.Categorienaam)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AlcoholPercentage___, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AlcoholPercentage___)
+                    @Html.ValidationMessageFor(model => model.AlcoholPercentage___)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Inhoud_cl_, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Inhoud_cl_)
+                    @Html.ValidationMessageFor(model => model.Inhoud_cl_)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProducentId, "Producent", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ProducentId")
+                    @Html.ValidationMessageFor(model => model.Producentnaam)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VerkochtPer, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VerkochtPer)
+                    @Html.ValidationMessageFor(model => model.VerkochtPer)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+    <div>
+        @Html.ActionLink(Texts.BackToList, "Index")
+    </div>
+</body>
+</html>

@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DrankencentraleDBJensAppelmansModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Adressen">
+    <Key>
+      <PropertyRef Name="AdresId" />
+    </Key>
+    <Property Name="AdresId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Land" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Provincie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Stad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Postcode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Staatnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nummer_Bus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="KlantID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Klanten" Relationship="Self.FK_Adressen_Klanten" FromRole="Adressen" ToRole="Klanten" />
+  </EntityType>
+  <EntityType Name="Bestellingen">
+    <Key>
+      <PropertyRef Name="BestelId" />
+    </Key>
+    <Property Name="BestelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KlantId" Type="Int32" Nullable="false" />
+    <Property Name="DatumVanBestelling" Type="DateTime" Precision="7" />
+    <Property Name="Totaalprijs" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="IsBetaald" Type="Boolean" />
+    <NavigationProperty Name="Klanten" Relationship="Self.FK_Bestellingen_Klanten" FromRole="Bestellingen" ToRole="Klanten" />
+    <NavigationProperty Name="Bestellingen_Producten" Relationship="Self.FK_Bestellingen_Producten_Bestellingen" FromRole="Bestellingen" ToRole="Bestellingen_Producten" />
+    <NavigationProperty Name="Betalingen" Relationship="Self.FK_Betalingen_Bestellingen" FromRole="Bestellingen" ToRole="Betalingen" />
+  </EntityType>
+  <EntityType Name="Bestellingen_Producten">
+    <Key>
+      <PropertyRef Name="BestelId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="BestelId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Aantal" Type="Int32" Nullable="false" />
+    <Property Name="Prijs_Item" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Subtotaal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Bestellingen" Relationship="Self.FK_Bestellingen_Producten_Bestellingen" FromRole="Bestellingen_Producten" ToRole="Bestellingen" />
+    <NavigationProperty Name="Producten" Relationship="Self.FK_Bestellingen_Producten_Producten" FromRole="Bestellingen_Producten" ToRole="Producten" />
+  </EntityType>
+  <EntityType Name="Betaalkaarten">
+    <Key>
+      <PropertyRef Name="BetaalkaartId" />
+    </Key>
+    <Property Name="BetaalkaartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KlantId" Type="Int32" Nullable="false" />
+    <Property Name="KaartNaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Kaartnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DatumGeldigTot" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Primairekaart" Type="Boolean" />
+    <NavigationProperty Name="Klanten" Relationship="Self.FK_BetaalKaarten_Klanten" FromRole="Betaalkaarten" ToRole="Klanten" />
+    <NavigationProperty Name="Betalingen" Relationship="Self.FK_Betalingen_Betaalkaarten" FromRole="Betaalkaarten" ToRole="Betalingen" />
+  </EntityType>
+  <EntityType Name="Betalingen">
+    <Key>
+      <PropertyRef Name="BetalingsId" />
+    </Key>
+    <Property Name="BetalingsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DatumVanBetaling" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="BedragBetaald" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="BetaalKaartId" Type="Int32" Nullable="false" />
+    <Property Name="BestelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bestellingen" Relationship="Self.FK_Betalingen_Bestellingen" FromRole="Betalingen" ToRole="Bestellingen" />
+    <NavigationProperty Name="Betaalkaarten" Relationship="Self.FK_Betalingen_Betaalkaarten" FromRole="Betalingen" ToRole="Betaalkaarten" />
+  </EntityType>
+  <EntityType Name="Categoriën">
+    <Key>
+      <PropertyRef Name="CategorieId" />
+    </Key>
+    <Property Name="CategorieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Categorienaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Beschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Producten" Relationship="Self.FK_Producten_Categoriën" FromRole="Categoriën" ToRole="Producten" />
+  </EntityType>
+  <EntityType Name="Facturen">
+    <Key>
+      <PropertyRef Name="FactuurId" />
+    </Key>
+    <Property Name="FactuurId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Klanten">
+    <Key>
+      <PropertyRef Name="KlantId" />
+    </Key>
+    <Property Name="KlantId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gebruikersnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmailAdres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Bedrijfsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Wachtwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Telefoonnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BTW_nummer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsZakelijk" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Adressen" Relationship="Self.FK_Adressen_Klanten" FromRole="Klanten" ToRole="Adressen" />
+    <NavigationProperty Name="Bestellingen" Relationship="Self.FK_Bestellingen_Klanten" FromRole="Klanten" ToRole="Bestellingen" />
+    <NavigationProperty Name="Betaalkaarten" Relationship="Self.FK_BetaalKaarten_Klanten" FromRole="Klanten" ToRole="Betaalkaarten" />
+  </EntityType>
+  <EntityType Name="Producenten">
+    <Key>
+      <PropertyRef Name="ProducentId" />
+    </Key>
+    <Property Name="ProducentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProducentNaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Land" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Producten" Relationship="Self.FK_Producten_Producenten" FromRole="Producenten" ToRole="Producten" />
+  </EntityType>
+  <EntityType Name="Producten">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Productnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Prijs" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Beschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CategorieId" Type="Int32" Nullable="false" />
+    <Property Name="AlcoholPercentage___" Type="Double" />
+    <Property Name="Inhoud_cl_" Type="Double" Nullable="false" />
+    <Property Name="ProducentId" Type="Int32" Nullable="false" />
+    <Property Name="VerkochtPer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Bestellingen_Producten" Relationship="Self.FK_Bestellingen_Producten_Producten" FromRole="Producten" ToRole="Bestellingen_Producten" />
+    <NavigationProperty Name="Categoriën" Relationship="Self.FK_Producten_Categoriën" FromRole="Producten" ToRole="Categoriën" />
+    <NavigationProperty Name="Producenten" Relationship="Self.FK_Producten_Producenten" FromRole="Producten" ToRole="Producenten" />
+  </EntityType>
+  <Association Name="FK_Adressen_Klanten">
+    <End Role="Klanten" Type="Self.Klanten" Multiplicity="1" />
+    <End Role="Adressen" Type="Self.Adressen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klanten">
+        <PropertyRef Name="KlantId" />
+      </Principal>
+      <Dependent Role="Adressen">
+        <PropertyRef Name="KlantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bestellingen_Klanten">
+    <End Role="Klanten" Type="Self.Klanten" Multiplicity="1" />
+    <End Role="Bestellingen" Type="Self.Bestellingen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klanten">
+        <PropertyRef Name="KlantId" />
+      </Principal>
+      <Dependent Role="Bestellingen">
+        <PropertyRef Name="KlantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bestellingen_Producten_Bestellingen">
+    <End Role="Bestellingen" Type="Self.Bestellingen" Multiplicity="1" />
+    <End Role="Bestellingen_Producten" Type="Self.Bestellingen_Producten" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bestellingen">
+        <PropertyRef Name="BestelId" />
+      </Principal>
+      <Dependent Role="Bestellingen_Producten">
+        <PropertyRef Name="BestelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Betalingen_Bestellingen">
+    <End Role="Bestellingen" Type="Self.Bestellingen" Multiplicity="1" />
+    <End Role="Betalingen" Type="Self.Betalingen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bestellingen">
+        <PropertyRef Name="BestelId" />
+      </Principal>
+      <Dependent Role="Betalingen">
+        <PropertyRef Name="BestelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bestellingen_Producten_Producten">
+    <End Role="Producten" Type="Self.Producten" Multiplicity="1" />
+    <End Role="Bestellingen_Producten" Type="Self.Bestellingen_Producten" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producten">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Bestellingen_Producten">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BetaalKaarten_Klanten">
+    <End Role="Klanten" Type="Self.Klanten" Multiplicity="1" />
+    <End Role="Betaalkaarten" Type="Self.Betaalkaarten" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klanten">
+        <PropertyRef Name="KlantId" />
+      </Principal>
+      <Dependent Role="Betaalkaarten">
+        <PropertyRef Name="KlantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Betalingen_Betaalkaarten">
+    <End Role="Betaalkaarten" Type="Self.Betaalkaarten" Multiplicity="1" />
+    <End Role="Betalingen" Type="Self.Betalingen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Betaalkaarten">
+        <PropertyRef Name="BetaalkaartId" />
+      </Principal>
+      <Dependent Role="Betalingen">
+        <PropertyRef Name="BetaalKaartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producten_Categoriën">
+    <End Role="Categoriën" Type="Self.Categoriën" Multiplicity="1" />
+    <End Role="Producten" Type="Self.Producten" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoriën">
+        <PropertyRef Name="CategorieId" />
+      </Principal>
+      <Dependent Role="Producten">
+        <PropertyRef Name="CategorieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producten_Producenten">
+    <End Role="Producenten" Type="Self.Producenten" Multiplicity="1" />
+    <End Role="Producten" Type="Self.Producten" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producenten">
+        <PropertyRef Name="ProducentId" />
+      </Principal>
+      <Dependent Role="Producten">
+        <PropertyRef Name="ProducentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DrankencentraleDBJensAppelmansEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Adressen" EntityType="Self.Adressen" />
+    <EntitySet Name="Bestellingen" EntityType="Self.Bestellingen" />
+    <EntitySet Name="Bestellingen_Producten" EntityType="Self.Bestellingen_Producten" />
+    <EntitySet Name="Betaalkaarten" EntityType="Self.Betaalkaarten" />
+    <EntitySet Name="Betalingen" EntityType="Self.Betalingen" />
+    <EntitySet Name="Categoriën" EntityType="Self.Categoriën" />
+    <EntitySet Name="Facturen" EntityType="Self.Facturen" />
+    <EntitySet Name="Klanten" EntityType="Self.Klanten" />
+    <EntitySet Name="Producenten" EntityType="Self.Producenten" />
+    <EntitySet Name="Producten" EntityType="Self.Producten" />
+    <AssociationSet Name="FK_Adressen_Klanten" Association="Self.FK_Adressen_Klanten">
+      <End Role="Klanten" EntitySet="Klanten" />
+      <End Role="Adressen" EntitySet="Adressen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bestellingen_Klanten" Association="Self.FK_Bestellingen_Klanten">
+      <End Role="Klanten" EntitySet="Klanten" />
+      <End Role="Bestellingen" EntitySet="Bestellingen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bestellingen_Producten_Bestellingen" Association="Self.FK_Bestellingen_Producten_Bestellingen">
+      <End Role="Bestellingen" EntitySet="Bestellingen" />
+      <End Role="Bestellingen_Producten" EntitySet="Bestellingen_Producten" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Betalingen_Bestellingen" Association="Self.FK_Betalingen_Bestellingen">
+      <End Role="Bestellingen" EntitySet="Bestellingen" />
+      <End Role="Betalingen" EntitySet="Betalingen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bestellingen_Producten_Producten" Association="Self.FK_Bestellingen_Producten_Producten">
+      <End Role="Producten" EntitySet="Producten" />
+      <End Role="Bestellingen_Producten" EntitySet="Bestellingen_Producten" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BetaalKaarten_Klanten" Association="Self.FK_BetaalKaarten_Klanten">
+      <End Role="Klanten" EntitySet="Klanten" />
+      <End Role="Betaalkaarten" EntitySet="Betaalkaarten" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Betalingen_Betaalkaarten" Association="Self.FK_Betalingen_Betaalkaarten">
+      <End Role="Betaalkaarten" EntitySet="Betaalkaarten" />
+      <End Role="Betalingen" EntitySet="Betalingen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producten_Categoriën" Association="Self.FK_Producten_Categoriën">
+      <End Role="Categoriën" EntitySet="Categoriën" />
+      <End Role="Producten" EntitySet="Producten" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producten_Producenten" Association="Self.FK_Producten_Producenten">
+      <End Role="Producenten" EntitySet="Producenten" />
+      <End Role="Producten" EntitySet="Producten" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

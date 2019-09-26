@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DrankencentraleDBJensAppelmansModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Adresses">
+    <Key>
+      <PropertyRef Name="AdresId" />
+    </Key>
+    <Property Name="AdresId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Provincie" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Stad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Postcode" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Straatnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nummer/Bus" Type="nchar" MaxLength="10" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Voornaam" Type="nvarchar" MaxLength="50" />
+    <Property Name="Achternaam" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telefoon" Type="nvarchar" MaxLength="50" />
+    <Property Name="BTW_nummer" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsZakelijk" Type="bit" />
+    <Property Name="TaalId" Type="char" MaxLength="2" />
+    <Property Name="GeboorteDatum" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategorieId" />
+    </Key>
+    <Property Name="CategorieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Categorienaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Beschrijving" Type="ntext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="KlantId" />
+    </Key>
+    <Property Name="KlantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Debitcards">
+    <Key>
+      <PropertyRef Name="BetaalkaartId" />
+    </Key>
+    <Property Name="BetaalkaartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="KaartNaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Kaartnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DatumGeldigTot" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Primairekaart" Type="bit" />
+  </EntityType>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="TaalId" />
+    </Key>
+    <Property Name="Taalnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TaalId" Type="char" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Multimedia">
+    <Key>
+      <PropertyRef Name="MultimediaId" />
+    </Key>
+    <Property Name="MultimediaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImagePath" Type="nvarchar(max)" />
+    <Property Name="ProductId" Type="int" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="BestelId" />
+    </Key>
+    <Property Name="BestelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="DatumVanBestelling" Type="datetime2" Precision="7" />
+    <Property Name="Totaalprijs" Type="money" Nullable="false" />
+    <Property Name="IsBetaald" Type="bit" />
+  </EntityType>
+  <EntityType Name="Orders_Products">
+    <Key>
+      <PropertyRef Name="BestelId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="BestelId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Aantal" Type="int" Nullable="false" />
+    <Property Name="Prijs/Item" Type="money" Nullable="false" />
+    <Property Name="Subtotaal" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payments">
+    <Key>
+      <PropertyRef Name="BetalingsId" />
+    </Key>
+    <Property Name="BetalingsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DatumVanBetaling" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="BedragBetaald" Type="money" Nullable="false" />
+    <Property Name="BetaalKaartId" Type="int" Nullable="false" />
+    <Property Name="BestelId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Producers">
+    <Key>
+      <PropertyRef Name="ProducentId" />
+    </Key>
+    <Property Name="ProducentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProducentNaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Productnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prijs" Type="money" Nullable="false" />
+    <Property Name="Beschrijving" Type="ntext" Nullable="false" />
+    <Property Name="CategorieId" Type="int" Nullable="false" />
+    <Property Name="AlcoholPercentage___" Type="float" />
+    <Property Name="Inhoud_cl_" Type="float" Nullable="false" />
+    <Property Name="ProducentId" Type="int" Nullable="false" />
+    <Property Name="VerkochtPer" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Sessions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Starttime" Type="datetime2" Precision="7" />
+    <Property Name="Stoptime" Type="datetime2" Precision="7" />
+    <Property Name="NumberOfOperations" Type="int" />
+  </EntityType>
+  <Association Name="FK_Adresses_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Adresses" Type="Self.Adresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Adresses">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_ToLanguages">
+    <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="TaalId" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="TaalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bestellingen_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="KlantId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bestellingen_Producten_Bestellingen">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Orders_Products" Type="Self.Orders_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="BestelId" />
+      </Principal>
+      <Dependent Role="Orders_Products">
+        <PropertyRef Name="BestelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bestellingen_Producten_Producten">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Orders_Products" Type="Self.Orders_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Orders_Products">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BetaalKaarten_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Debitcards" Type="Self.Debitcards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Debitcards">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Betalingen_Bestellingen">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="BestelId" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="BestelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Betalingen_Betaalkaarten">
+    <End Role="Debitcards" Type="Self.Debitcards" Multiplicity="1" />
+    <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Debitcards">
+        <PropertyRef Name="BetaalkaartId" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="BetaalKaartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Multimedia_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="Multimedia" Type="Self.Multimedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Multimedia">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producten_Categoriën">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategorieId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategorieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producten_Producenten">
+    <End Role="Producers" Type="Self.Producers" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producers">
+        <PropertyRef Name="ProducentId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="ProducentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sessions_ToAspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sessions">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DrankencentraleDBJensAppelmansModelStoreContainer">
+    <EntitySet Name="Adresses" EntityType="Self.Adresses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Debitcards" EntityType="Self.Debitcards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Multimedia" EntityType="Self.Multimedia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders_Products" EntityType="Self.Orders_Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producers" EntityType="Self.Producers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Adresses_AspNetUsers" Association="Self.FK_Adresses_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Adresses" EntitySet="Adresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_ToLanguages" Association="Self.FK_AspNetUsers_ToLanguages">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bestellingen_Customers" Association="Self.FK_Bestellingen_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bestellingen_Producten_Bestellingen" Association="Self.FK_Bestellingen_Producten_Bestellingen">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Orders_Products" EntitySet="Orders_Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bestellingen_Producten_Producten" Association="Self.FK_Bestellingen_Producten_Producten">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Orders_Products" EntitySet="Orders_Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BetaalKaarten_AspNetUsers" Association="Self.FK_BetaalKaarten_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Debitcards" EntitySet="Debitcards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Betalingen_Bestellingen" Association="Self.FK_Betalingen_Bestellingen">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Betalingen_Betaalkaarten" Association="Self.FK_Betalingen_Betaalkaarten">
+      <End Role="Debitcards" EntitySet="Debitcards" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_AspNetUsers" Association="Self.FK_Customers_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Multimedia_Products" Association="Self.FK_Multimedia_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Multimedia" EntitySet="Multimedia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producten_Categoriën" Association="Self.FK_Producten_Categoriën">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producten_Producenten" Association="Self.FK_Producten_Producenten">
+      <End Role="Producers" EntitySet="Producers" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sessions_ToAspNetUsers" Association="Self.FK_Sessions_ToAspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Sessions" EntitySet="Sessions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

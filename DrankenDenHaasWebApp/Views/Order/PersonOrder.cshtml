@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DrankenDenHaasWebApp.OrderViewModel>
+
+@{
+    // Layout = null;
+}
+
+<!DOCTYPE html>
+@*//model.Customer.UserId)*@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Totaalprijs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumVanBestelling)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBetaald)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Totaalprijs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumVanBestelling)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBetaald)
+            </td>
+           
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.BestelId }) |*@
+                    @Html.ActionLink("Details van bestelling", "Index", "Order_Product", new { id = item.BestelId }, null) 
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.BestelId })*@
+                </td>
+            }
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

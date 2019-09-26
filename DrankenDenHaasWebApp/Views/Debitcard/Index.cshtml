@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DrankenDenHaasWebApp.DebitcardViewModel>
+
+@{
+  //  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KaartNaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kaartnummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumGeldigTot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Primairekaart)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KaartNaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kaartnummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumGeldigTot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Primairekaart)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.BetaalkaartId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.BetaalkaartId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.BetaalkaartId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

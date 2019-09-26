@@ -1,0 +1,102 @@
+﻿@model DrankenDenHaasWebApp.ProductViewModel
+@using DrankenDenHaasWebApp.Translations
+@{
+    //  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Texts.Details</title>
+</head>
+<body>
+    <div>
+        <h2>@Texts.Details</h2>
+        <hr />
+        <dl class="row">
+
+            <dt class="col-lg-3">
+                @Html.DisplayNameFor(model => model.Productnaam)
+            </dt>
+
+            <dd class="col">
+                @Html.DisplayFor(model => model.Productnaam)
+            </dd>
+            <dt class="col-lg-3">
+                @Html.DisplayNameFor(model => model.Prijs)
+            </dt>
+
+            <dd class="col">
+                @Html.DisplayFor(model => model.Prijs)
+            </dd>
+
+            <dt class="col-lg-3">
+                @Html.DisplayNameFor(model => model.Beschrijving)
+            </dt>
+
+            <dd class="col">
+                @Html.DisplayFor(model => model.Beschrijving)
+            </dd>
+
+            <dt class="col-lg-3">
+                @Html.DisplayNameFor(model => model.AlcoholPercentage___)
+            </dt>
+
+            <dd class="col">
+                @Html.DisplayFor(model => model.AlcoholPercentage___)
+            </dd>
+
+            <dt class="col-lg-3">
+                @Html.DisplayNameFor(model => model.Inhoud_cl_)
+            </dt>
+
+            <dd class="col">
+                @Html.DisplayFor(model => model.Inhoud_cl_)
+            </dd>
+
+            <dt class="col-lg-3">
+                @Html.DisplayNameFor(model => model.VerkochtPer)
+            </dt>
+
+            <dd class="col">
+                @Html.DisplayFor(model => model.VerkochtPer)
+            </dd>
+
+            <dt class="col-lg-3">
+                @Html.DisplayNameFor(model => model.Categorienaam)
+            </dt>
+
+            <dd class="col">
+                @Html.DisplayFor(model => model.Categorienaam)
+            </dd>
+
+            <dt class="col-lg-3">
+                @Html.DisplayNameFor(model => model.Producentnaam)
+            </dt>
+
+            <dd class="col">
+                @Html.DisplayFor(model => model.Producentnaam)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @if (User.IsInRole("Admin") || User.IsInRole("Productmanager"))
+        {
+
+        @Html.ActionLink(Texts.Edit, "Edit", new { id = Model.ProductId }) 
+            <br />
+            
+            @Html.ActionLink(Texts.BackToList, "Index")
+        }
+        @*@if (User.IsInRole("User"))
+        {}*@
+        else
+        {
+        @Html.ActionLink(Texts.BackToList, "Index", "Home")
+        }
+    </p>
+</body>
+</html>

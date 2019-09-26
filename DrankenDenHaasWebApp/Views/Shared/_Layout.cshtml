@@ -1,0 +1,98 @@
+﻿@using DrankenDenHaasWebApp.Translations;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - DrankenDenHaas</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img class="navbar-left" src="~/Afbeeldingen/Haasje.png" width="45" height="40" alt="Logo den haas" />
+                @Html.ActionLink("DrankenDenHaas", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li>@Html.ActionLink(Texts.About, "About", "Home")</li>
+                    <li>@Html.ActionLink(Texts.Contact, "Contact", "Home")</li>
+
+                    @if (User.IsInRole("Productmanager") || User.IsInRole("Admin"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" title="Beheer" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i><i class="fas fa-tools"></i></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink(Texts.Products, "Index", "Product")</li>
+                                <li>@Html.ActionLink(Texts.Categories, "Index", "Category")</li>
+                                <li>@Html.ActionLink(Texts.Producer, "Index", "Producer")</li>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li role="separator" class="divider" />
+                                    <li>@Html.ActionLink(Texts.Customers, "Index", "Customer")</li>
+                                    <li>@Html.ActionLink(Texts.Orders, "Index", "Order")</li>
+                                    <li role="separator" class="divider" />
+                                    <li>@Html.ActionLink(Texts.Users, "Index", "Account")</li>
+                                }
+                            </ul>
+                        </li>
+
+                    }
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#"
+                           class="dropdown-toggle nav navbar-right"
+                           data-toggle="dropdown"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+
+                            @ViewBag.LanguageName
+
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var v in DrankenDenHaasWebApp.Language.Languages)
+                            {
+                                if (v.TaalId != ViewBag.LanguageId && v.TaalId != "? ")
+                                {
+                                    <li>@Html.ActionLink(v.Taalnaam, "ChangeLanguage", "Home", new { id = v.TaalId }, null)</li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+     
+        <hr />
+        <footer class="footer">
+            <p>&copy; @DateTime.Now.Year - DrankenDenHaas |@Texts.All_rights_reserved</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

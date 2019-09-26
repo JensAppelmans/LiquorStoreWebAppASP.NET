@@ -1,0 +1,73 @@
+﻿@model DrankenDenHaasWebApp.PaymentViewModel
+
+@{
+  //  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>Payment</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.BetalingsId)
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.DatumVanBetaling, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DatumVanBetaling)
+                    @Html.ValidationMessageFor(model => model.DatumVanBetaling)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.BedragBetaald, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BedragBetaald)
+                    @Html.ValidationMessageFor(model => model.BedragBetaald)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.BetaalKaartId, "BetaalKaartId", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("BetaalKaartId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.BetaalKaartId)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.BestelId, "BestelId", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("BestelId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.BestelId)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

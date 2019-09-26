@@ -1,0 +1,50 @@
+﻿@model DrankenDenHaasWebApp.Models.Shopbasket
+@using DrankenDenHaasWebApp.Translations
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>@Texts.Delete</h2>
+
+<h3>@Texts.DeleteSure</h3>
+<div>
+    <h3>@Texts.Shopbasket</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Prijs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prijs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aantal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aantal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductNaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductNaam)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink(Texts.BackToList, "Index")
+        </div>
+    }
+</div>
