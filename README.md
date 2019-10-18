@@ -35,3 +35,5 @@ Used Technologies:
 Future updates: 
 - Fix the bug where the shopbasket is shared for all users
 - Refactor code 
+
+!!! If you want to see this project in action, just import the .bacpac in SQL server !!!
