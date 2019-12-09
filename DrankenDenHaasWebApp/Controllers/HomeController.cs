@@ -22,8 +22,6 @@ namespace DrankenDenHaasWebApp.Controllers
                 if (p.ProductId > 0)
                     products.Add(new ProductViewModel(p));
             return View(products); 
-            //var products = db.Products.Include(p => p.Category).Include(p => p.Producer);
-            //return View(products.ToList());
         }
 
         public ActionResult About()

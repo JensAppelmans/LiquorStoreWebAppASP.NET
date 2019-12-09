@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Web;
 using DrankenDenHaasWebApp.Translations; 
@@ -35,6 +36,8 @@ namespace DrankenDenHaasWebApp
          
         */
 
+        [Display(Name = "")]
+        public string ImagePath { get; set; }
 
         [Display(Name = "OrderId", ResourceType = typeof(Texts))]
         public int BestelId { get; set; }
@@ -69,6 +72,18 @@ namespace DrankenDenHaasWebApp
             Prijs_Item = model.Prijs_Item;
             Subtotaal = model.Subtotaal;
             Productnaam = model.Product.Productnaam;
-        }
+
+            using (DrankencentraleDBJensAppelmansEntities db = new DrankencentraleDBJensAppelmansEntities())
+            {
+
+                var query = db.Multimedias.Where(p => p.ProductId == ProductId);
+
+                string absPath = query.First().ImagePath;
+                string relPath = Path.GetFileName(absPath);
+                ImagePath = "~/Afbeeldingen/" + relPath;
+            }
+            }
+
+
     }
 }

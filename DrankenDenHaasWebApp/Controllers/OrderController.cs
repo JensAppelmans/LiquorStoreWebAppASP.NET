@@ -24,18 +24,7 @@ namespace DrankenDenHaasWebApp.Controllers
                     if (p.BestelId > 0)
                         orders.Add(new OrderViewModel(p));
                 return View(orders);
-                //var orders = db.Orders.Include(o => o.Customer);
-                //return View(orders.ToList());
-            
-            //else
-            //{
-            //    List<OrderViewModel> orders = new List<OrderViewModel>();
-            //    foreach (Order p in db.Orders.Where(c => c.Customer.UserId == id).OrderBy(ord => ord.DatumVanBestelling).Include(o => o.Customer))
-            //        if (p.BestelId > 0)
-            //            orders.Add(new OrderViewModel(p));
-            //    return View(orders);
-                
-            //}
+        
         }
         public ActionResult PersonOrder(string id)
         {

@@ -54,12 +54,6 @@ namespace DrankenDenHaasWebApp.Controllers
             return View(shopbasket);
         }
 
-        // GET: Shopbasket/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Shopbasket/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -92,37 +86,21 @@ namespace DrankenDenHaasWebApp.Controllers
             return View(shopbasket);
         }
 
-        //[HttpPost]
-        //public ActionResult AddProduct(string image, int? id, string naam, int aantal, decimal prijs)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Shopbasket a1 = new Shopbasket {ImagePath = image,  Id = (int)id, ProductNaam = naam, Aantal = aantal, Prijs = prijs };
-
-        //    Shopbasket.VoegToe(a1);
-
-        //    return Json("succes");
-
-        //}
-
         // POST: Shopbasket/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Prijs,Aantal,ProductNaam")] Shopbasket shopbasket)
+        public ActionResult Edit([Bind(Include = "Id,Prijs,Aantal,ProductNaam,ImagePath")] Shopbasket shopbasket)
         {
             if (ModelState.IsValid)
             {
                 var oldValue = Shopbasket.winkelmandje.First(p => p.Id == shopbasket.Id);
                 var newValue = shopbasket;
+                newValue.ImagePath = oldValue.ImagePath; 
                 int index = Shopbasket.winkelmandje.IndexOf(oldValue);
                 if (index != -1)
                     Shopbasket.winkelmandje[index] = newValue;
-                //db.Entry(shopbasket).State = EntityState.Modified;
-                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(shopbasket);

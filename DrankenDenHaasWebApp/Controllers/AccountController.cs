@@ -23,9 +23,6 @@ namespace DrankenDenHaasWebApp.Controllers
         Adress adress;
         AccountDetailViewModel model;
 
-
-
-
         private ApplicationDbContext dbDefault = new ApplicationDbContext();
         private DrankencentraleDBJensAppelmansEntities dbEntity = new DrankencentraleDBJensAppelmansEntities();
 
